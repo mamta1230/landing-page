@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Landing Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Star Background -->
+    <div id="stars"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>Burger House</h1>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Section -->
+    <section class="hero">
+        <div class="burger-display">
+            <img id="main-burger" src="img5.jpg" alt="Main Burger">
+        </div>
+        <div class="burger-content">
+            <h2 id="burger-title">Classic Cheeseburger</h2>
+            <p id="burger-description">A juicy grilled beef patty with melted cheese, fresh lettuce, and tomatoes in a toasted bun.</p>
+            <button class="order-btn">Order Now</button>
+        </div>
+    </section>
+
+    <!-- Burger Selection -->
+     
+    <div class="burger-selection">
+        <img class="burger-thumb active" src="img1.jpg" data-title="Classic Cheeseburger" data-description="A juicy grilled beef patty with melted cheese, fresh lettuce, and tomatoes in a toasted bun.">
+        <img class="burger-thumb" src="img2.jpg" data-title="BBQ Bacon Burger" data-description="Smoky BBQ sauce, crispy bacon, cheddar cheese, and grilled beef patty on a sesame bun.">
+        <img class="burger-thumb" src="img3.jpg" data-title="Spicy Jalapeno Burger" data-description="Flame-grilled beef patty topped with spicy jalapenos, pepper jack cheese, and chipotle mayo.">
+        <img class="burger-thumb" src="img4.jpg" data-title="Mushroom Swiss Burger" data-description="Sauteed mushrooms, melted Swiss cheese, and creamy garlic aioli on a toasted bun.">
+    </div>
+
+<script>
+    function createStars() {
+        const starContainer = document.getElementById("stars");
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+    
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement("div");
+            star.className = "star";
+            star.style.left = `${Math.random() * windowWidth}px`;
+            star.style.top = `${Math.random() * windowHeight}px`;
+            starContainer.appendChild(star);
+        }
+    }
+    
+    window.onload = createStars;
+    
+    // Burger Image & Content Switcher
+    const burgerThumbs = document.querySelectorAll(".burger-thumb");
+    const mainBurger = document.getElementById("main-burger");
+    const burgerTitle = document.getElementById("burger-title");
+    const burgerDescription = document.getElementById("burger-description");
+    
+    burgerThumbs.forEach(thumb => {
+        thumb.addEventListener("click", function () {
+        
+            mainBurger.src = this.src;
+            mainBurger.style.transform = "scale(1.1)";
+            setTimeout(() => mainBurger.style.transform = "scale(1)", 300);
+    
+
+            burgerTitle.textContent = this.getAttribute("data-title");
+            burgerDescription.textContent = this.getAttribute("data-description");
+    
+            // Remove active class and set new one
+            burgerThumbs.forEach(img => img.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+
+    
+    </script>
+</body>
+</html>
